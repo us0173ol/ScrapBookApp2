@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.bignerdranch.android.scrapbookapp2.MainActivity">
+    <RelativeLayout
+        android:id="@+id/RL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/search_comments_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Comments"/>
+        <EditText
+            android:id="@+id/search_comments_edittext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/search_comments_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="Search Comments"
+            android:textAlignment="center"/>
+        <Button
+            android:id="@+id/take_picture_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_comments_button"
+            android:text="Add Picture"
+            android:layout_alignRight="@id/search_comments_button"
+            android:layout_alignEnd="@id/search_comments_button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+        <ImageView
+            android:id="@+id/camera_picture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/darker_gray"
+            android:cropToPadding="true"
+            android:layout_below="@id/take_picture_button"/>
+        <EditText
+            android:id="@+id/comments_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/camera_picture"
+            android:layout_below="@id/take_picture_button"/>
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comments_edit_text"
+            android:layout_toRightOf="@id/camera_picture"
+            android:text="Add"/>
+    </RelativeLayout>
+
+
+            <ListView
+                android:id="@+id/pictures_comments_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RL"/>
+
+</RelativeLayout>
