@@ -23,7 +23,7 @@ public class DatabaseManager {
     protected static final String DB_TABLE = "pics_and_comments";
 
     protected static final String ID_COL= "_id";
-    protected static final String PICTURE_COL = "pictures";
+    protected static final String PICTURE_PATH_COL = "pictures";
     protected static final String COMMENTS_COL = "comments";
     protected static final String TAGS_COL = "tags";
     protected static final String DATE_MODIFIED_COL = "date_modified";
@@ -45,9 +45,10 @@ public class DatabaseManager {
         return cursor;
     }
 
-    public boolean addObject(String comment){
+    public boolean addObject(String comment, String path){
         ContentValues newObject = new ContentValues();
         newObject.put(COMMENTS_COL, comment);
+        newObject.put(PICTURE_PATH_COL, path);
 
 
 
@@ -70,7 +71,7 @@ public class DatabaseManager {
         @Override
         public void onCreate(SQLiteDatabase db){
             String createSQLbase = "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s TEXT, %s TEXT)";
-            String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, COMMENTS_COL, PICTURE_COL, TAGS_COL );
+            String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, COMMENTS_COL, PICTURE_PATH_COL, TAGS_COL );
             db.execSQL(createSQL);
 
         }

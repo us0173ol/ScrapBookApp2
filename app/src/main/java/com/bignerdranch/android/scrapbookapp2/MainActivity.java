@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
     private Bitmap mImage;
     private String mImagePath;
     ImageView mCameraPicture;
+    EditText commentsET;
 
     private static int LIST_RESULTS = 1;
     private static int TAKE_PICTURE = 0;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
         final EditText searchCommentsET = (EditText)findViewById(R.id.search_comments_edittext);
         final Button takePictureButton = (Button) findViewById(R.id.take_picture_button);
         final ListView itemsListView = (ListView) findViewById(R.id.pictures_comments_listview);
-        final EditText commentsET = (EditText) findViewById(R.id.comments_edit_text);
+        commentsET = (EditText) findViewById(R.id.comments_edit_text);
         //final ImageView cameraPictureIV = (ImageView) findViewById(R.id.camera_picture);
         Cursor cursor = mDatabaseManager.getAllInfo();
         cursorListAdapter = new MainListCursorAdapter(this, cursor,true );
@@ -108,8 +109,9 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
             @Override
             public void onClick(View v){
                 //updateDate();TODO
-                String commentsMade = commentsET.getText().toString();
-                mDatabaseManager.addObject(commentsMade);
+                //String commentsMade = commentsET.getText().toString();
+//
+                //mDatabaseManager.addObject(commentsMade);
 
 
                 cursorListAdapter.changeCursor(mDatabaseManager.getAllInfo());
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
     @Override
     protected void onPause(){
         super.onPause();
-        mDatabaseManager.close();
+        //mDatabaseManager.close();
 
     }
     @Override
@@ -175,8 +177,13 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
         Log.d(TAG, "On Activity Result");
 
         if (resultCode == RESULT_OK && requestCode == TAKE_PICTURE){
-            scaleBitmap();
+            String commentsMade = commentsET.getText().toString();
+
+            mDatabaseManager.addObject(commentsMade,mImagePath);
+            scaleBitmap(mImagePath);
             saveToMediaStore();
+
+
         }
     }
 
@@ -186,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
         Log.d(TAG, "onWindowFocusChanged");
 
         if(hasFocus && mImagePath != null){
-            scaleBitmap();
+            scaleBitmap(mImagePath);
             mCameraPicture.setImageBitmap(mImage);
         }
     }
@@ -223,15 +230,15 @@ public class MainActivity extends AppCompatActivity implements MainListCursorAda
         outBundle.putString(IMAGE_FILEPATH_KEY, mImagePath);
     }
 
-    public  Bitmap scaleBitmap(){
+    public  Bitmap scaleBitmap(String path){
         int imageViewHeight = mCameraPicture.getHeight();
         int imageViewWidth = mCameraPicture.getWidth();
 
         BitmapFactory.Options bOptions = new BitmapFactory.Options();
         bOptions.inJustDecodeBounds = true;
 
-        BitmapFactory.decodeFile(mImagePath, bOptions);
-
+        //BitmapFactory.decodeFile(mImagePath, bOptions);
+        BitmapFactory.decodeFile(path, bOptions);
         int pictureHeight = bOptions.outHeight;
         int pictureWidth = bOptions.outWidth;
 

@@ -2,10 +2,12 @@ package com.bignerdranch.android.scrapbookapp2;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -18,7 +20,7 @@ public class MainListCursorAdapter extends CursorAdapter {
     ItemContentsChangedListener mItemContentsChangedListener;
 
     private static final int ID_COL = 0;
-    private static final int PICTURE_COL = 2;
+    //private static final Bitmap PICTURE_COL = new Bitmap();
     private static final int COMMENTS_COL = 1;
     private static final int TAGS_COL = 3;
 //    private static final int
@@ -42,13 +44,14 @@ public class MainListCursorAdapter extends CursorAdapter {
     }
     public void bindView(View view, Context context, final Cursor cursor){
         //TODO FINISH bindView
-        //ImageView pictureTaken = (ImageView) view.findViewById(R.id.item_list_picture_image_view);
+        ImageView pictureTaken = (ImageView) view.findViewById(R.id.item_list_picture_image_view);
         TextView commentsMade = (TextView) view.findViewById(R.id.item_list_comment_text_view);
         TextView tagsMade = (TextView) view.findViewById(R.id.item_list_tags);
         //Bitmap bitmap = MainActivity.scaleBitmap();
 
         tagsMade.setText(cursor.getString(TAGS_COL));
         commentsMade.setText(cursor.getString(COMMENTS_COL));
+        //pictureTaken.setImageBitmap((PICTURE_COL));
 //        pictureTaken.setImageBitmap();
 
         final int object_id = cursor.getInt(ID_COL);
